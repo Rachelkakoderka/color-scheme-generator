@@ -45,7 +45,7 @@ useEffect(getColors, [colors])
 
 const  colorElementsTorender =  colors.map(x => (<div className='color-stripe' style={{backgroundColor: x}}>{x}</div>)
       )
-const inputSchemesOption = schemesToChooseFrom.map(x => (<option value= {x} />)) 
+const inputSchemesOption = schemesToChooseFrom.map(x => (<option value={x}>{x}</option>)) 
 
  
 //console.log(colors)
@@ -58,11 +58,19 @@ const inputSchemesOption = schemesToChooseFrom.map(x => (<option value= {x} />))
       
       <div className='colors-board'>
         <form>
-          <input type="color" onChange={(e) => {setChosenColor(e.target.value.slice(1))}}/>
-          <input list="schemes" onChange={(e) => setChosenScheme(e.target.value)}/>
-            <datalist id="schemes" >
+          <div>
+            <label htmlFor="color">Choose a color:</label> <br/>
+            <input type="color" onChange={(e) => {setChosenColor(e.target.value.slice(1))}}/>
+          </div>
+          
+          <div className='schemes-box'>
+          <label htmlFor="schemes">Choose a scheme:    </label>
+          <br/>
+            <select id="schemes" name="schemes" onChange={(e) => setChosenScheme(e.target.value)}>
               {inputSchemesOption}
-            </datalist>
+            </select>
+          </div>
+          
           <button id="get-colors-btn" onClick= {getColors}>Choose scheme</button>
         </form>        
       </div>

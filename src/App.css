@@ -22,10 +22,31 @@ input {
 
 
 .colors-board {
-  display: flex;
-  flex-direction: column;
-z-index: 1;  
+  padding:10px;
+  z-index: 1;  
 }
+
+form {
+  display: flex;
+  }
+
+form > * {
+ margin: 8px;
+}
+form:first-child {
+  text-align: center;
+}
+
+form> button {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 5px;
+  height: fit-content;
+}
+.schemes-box >*{
+  margin: 5px;
+}
+
 .color-palette {
   display: fixed;
   width:100vw;
