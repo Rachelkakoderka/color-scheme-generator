@@ -55,10 +55,10 @@ const inputSchemesOption = schemesToChooseFrom.map(x => (<option value={x}>{x}</
   return (
     <div className="App">
       
-      
+      <h1>Color Scheme Generator</h1>
       <div className='colors-board'>
         <form>
-          <div>
+          <div className='color-box'>
             <label htmlFor="color">Choose a color:</label> <br/>
             <input type="color" onChange={(e) => {setChosenColor(e.target.value.slice(1))}}/>
           </div>
@@ -70,8 +70,7 @@ const inputSchemesOption = schemesToChooseFrom.map(x => (<option value={x}>{x}</
               {inputSchemesOption}
             </select>
           </div>
-          
-          <button id="get-colors-btn" onClick= {getColors}>Choose scheme</button>
+        
         </form>        
       </div>
 
