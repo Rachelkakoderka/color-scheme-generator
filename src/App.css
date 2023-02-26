@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+body {
+  font-family: Karla, sans-serif;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -18,11 +23,20 @@ input {
 
 .colors-board {
   display: flex;
+  flex-direction: column;
+z-index: 1;  
 }
 .color-palette {
-  display: flex;
+  display: fixed;
+  width:100vw;
+  height: 100vh;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 0;
 }
 .color-stripe {
-  width: 60px;
-  height: 80px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
 }

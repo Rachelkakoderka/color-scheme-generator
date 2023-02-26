@@ -4,52 +4,70 @@ import './App.css';
 
 function App() {
 
- const [colors, setColors] = useState([])
- const [chosenColor, setChosenColor] = useState("0047AB")
- const [chosenScheme, setChosenScheme] = useState("complement")
+ const [colors, setColors] = useState<[]>([])
+ const [chosenColor, setChosenColor] = useState<string>("0047AB")
+ const [chosenScheme, setChosenScheme] = useState<string>("")
 
-  const button = document.getElementById("get-colors-btn")
+const schemesToChooseFrom : string[] = [
+  "monochrome",
+  "monochrome-dark",
+  "monochrome-light",
+  "analogic",
+  "complement",
+  "analogic-complement",
+  "triad",
+  "quad"
+  ];
+
+ const button = document.getElementById("get-colors-btn")
 
 
-  function getColors() :void{
 
+  function getColors() :void {
+    
+   
     let url =  "https://www.thecolorapi.com/scheme?"
     let newColor = `hex=${chosenColor}`;
     let newScheme = `&mode=${chosenScheme}`
+
     fetch(url+newColor+newScheme)
-  .then(res => res.json())
-  .then(data => {
+      .then(res => res.json())
+      .then(data => {
         let colorsArr = data.colors.map(((x:any) => {
           let color = x.hex.value
           return(color)}))
         setColors(colorsArr)
-        console.log("gotColors")
         }
       )
  }
 
 useEffect(getColors, [colors])
 
-const  colorElementsTorender =  colors.map(x => (<div className='color-stripe' style={{backgroundColor: x}}></div>)
+const  colorElementsTorender =  colors.map(x => (<div className='color-stripe' style={{backgroundColor: x}}>{x}</div>)
       )
+const inputSchemesOption = schemesToChooseFrom.map(x => (<option value= {x} />)) 
 
  
-console.log(colors)
-console.log(chosenColor)
+//console.log(colors)
+//console.log(chosenColor)
 
 
   return (
     <div className="App">
-      <form>
-        <input type="color" onChange={(e) => {setChosenColor(e.target.value.slice(1))}}/>
-        <input type="text" placeholder='choosescheme'/>
-        <button id="get-colors-btn" onClick= {getColors}>Choose scheme</button>
-      </form>
+      
       
       <div className='colors-board'>
-        <h2>Color Scheme</h2>
-        </div>
-        <div className='color-palette'>{colorElementsTorender}</div>
+        <form>
+          <input type="color" onChange={(e) => {setChosenColor(e.target.value.slice(1))}}/>
+          <input list="schemes" onChange={(e) => setChosenScheme(e.target.value)}/>
+            <datalist id="schemes" >
+              {inputSchemesOption}
+            </datalist>
+          <button id="get-colors-btn" onClick= {getColors}>Choose scheme</button>
+        </form>        
+      </div>
+
+      <div className='color-palette'>{colorElementsTorender}</div>
     </div>
   );
 }
